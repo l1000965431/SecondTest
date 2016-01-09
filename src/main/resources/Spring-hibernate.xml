@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <!-- 数据源配置 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/money"/>
+        <property name="username" value="seele"/>
+        <property name="password" value="123456"/>
+    </bean>
+
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
+
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+    </bean>
+
+    <!-- 配置事务异常封装 -->
+    <bean id="persistenceExceptionTranslationPostProcessor"
+          class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="Tradd*" propagation="REQUIRED" />
+            <tx:method name="Trupdate*" propagation="REQUIRED" />
+            <tx:method name="Trget*" propagation="REQUIRED" read-only="true" />
+            <!--<tx:method name="*" read-only="true" />-->
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config expose-proxy="true">
+        <!-- 只对业务逻辑层实施事务 -->
+        <aop:pointcut id="txPointcut" expression="execution(* com.base.SpringServiceTest..*.*(..))" />
+        <!-- Advisor定义，切入点和通知分别为txPointcut、txAdvice -->
+        <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/>
+    </aop:config>
+
+</beans>
