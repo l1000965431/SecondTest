@@ -25,10 +25,12 @@
       <configuration>
         <fileset id="web application context" name="MVC application context" removed="true" />
         <fileset id="web spring servlet context" name="MVC spring servlet context" removed="true" />
-        <fileset id="fileset" name="Spring Application Context" removed="false">
+        <fileset id="fileset" name="Spring Application Context1" removed="false">
+          <dependency>fileset</dependency>
           <file>file://$MODULE_DIR$/src/main/java/config/Appconfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/config/DataSourceConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/config/HibnateConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/config/HttpSessionConfig.java</file>
           <file>file://$MODULE_DIR$/src/main/java/config/MvcConfig.java</file>
         </fileset>
       </configuration>
