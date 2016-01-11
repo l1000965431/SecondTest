@@ -3,6 +3,8 @@ package com.base.SpringServiceTest;
 import com.base.SpringControllerModel.Usermodel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  * Created by liumin on 15/12/23.
  */
 
-/*@Service*/
+@Service
 public class SpringServiceTest {
 
     SessionFactory sessionFactory;
@@ -19,6 +21,7 @@ public class SpringServiceTest {
         this.sessionFactory = sessionFactory;
     }
 
+    @Transactional
     public void TraddUser(String name) {
         Session session = sessionFactory.getCurrentSession();
         Usermodel userModel = new Usermodel();
@@ -32,7 +35,7 @@ public class SpringServiceTest {
         session.save(userModel1);
     }
 
-
+    @Transactional
     public void Trupdate(String name) {
         Session session = sessionFactory.getCurrentSession();
         Usermodel userModel = new Usermodel();
@@ -40,14 +43,15 @@ public class SpringServiceTest {
         session.update(userModel);
     }
 
-
-    public void TrgetUser(){
+    @Transactional
+    public List TrgetUser(){
         Session session = sessionFactory.getCurrentSession();
         List<Usermodel> list = session.createSQLQuery( "SELECT * FROM usermodel" ).addEntity(Usermodel.class).list();
         for (Usermodel userModel:list){
             System.out.println( userModel.getName() );
         }
         session.flush();
+        return list;
     }
 
 }

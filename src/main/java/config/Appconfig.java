@@ -10,7 +10,7 @@ import org.springframework.web.servlet.mvc.Controller;
  * Created by liumin on 16/1/11.
  */
 @Configuration
-@ComponentScan(basePackages = "com.base.SpringServiceTest",excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = Controller.class)})
+@ComponentScan(basePackages = "com.base",excludeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,value = Controller.class)})
 @Import({HibnateConfig.class})
 public class Appconfig {
 

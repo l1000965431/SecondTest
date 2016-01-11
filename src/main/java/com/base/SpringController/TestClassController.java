@@ -3,6 +3,8 @@ package com.base.SpringController;
 
 import com.base.SpringControllerModel.Usermodel;
 import com.base.SpringServiceTest.SpringServiceTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by liumin on 15/12/22.
@@ -19,7 +22,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/Test")
 public class TestClassController {
 
-    @Resource(name = "springServiceTest")
+    @Autowired
     private SpringServiceTest springServiceTest;
 
     @RequestMapping("/TestClassUser")
@@ -38,11 +41,11 @@ public class TestClassController {
         return "1";
     }
 
-    @RequestMapping("/Testget")
+    @RequestMapping(value = "/Testget",produces = { MediaType.APPLICATION_JSON_VALUE
+            + ";charset=UTF-8" })
     @ResponseBody
-    public String Testget() {
-        springServiceTest.TrgetUser();
-        return "1";
+    public List Testget() {
+        return springServiceTest.TrgetUser();
     }
 
     @RequestMapping("/TestSetSession")

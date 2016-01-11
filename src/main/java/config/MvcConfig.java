@@ -22,7 +22,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.base.SpringController",includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,
+@ComponentScan(basePackages = "com.base",includeFilters = {@ComponentScan.Filter(type = FilterType.ANNOTATION,
         value = {Controller.class})})
 public class MvcConfig extends WebMvcConfigurationSupport{
 
