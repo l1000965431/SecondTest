@@ -22,7 +22,16 @@
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="web application context" name="MVC application context" removed="true" />
+        <fileset id="web spring servlet context" name="MVC spring servlet context" removed="true" />
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/java/config/Appconfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/config/DataSourceConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/config/HibnateConfig.java</file>
+          <file>file://$MODULE_DIR$/src/main/java/config/MvcConfig.java</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_5" inherit-compiler-output="false">

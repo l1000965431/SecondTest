@@ -8,7 +8,7 @@
     <property name="hibernate.format_sql">true</property>
     <property name="connection.url">jdbc:mysql://localhost:3306/SpringMoney</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <mapping resource="Usermodel.hbm.xml"/>
+    <mapping resource="com/base/SpringControllerModel/Usermodel.hbm.xml"/>
     <!-- DB schema will be updated if needed -->
     <!-- <property name="hbm2ddl.auto">update</property> -->
   </session-factory>
